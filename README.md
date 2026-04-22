@@ -1,7 +1,5 @@
 # Disaster Rescue Multi-Agent System
 
-> CSE419 Homework 01 — Student ID: 221805040 — Dogukan Parlak 
-
 A multi-agent system for disaster rescue coordination, powered by **LLM-based agents** via Ollama.
 
 ---
