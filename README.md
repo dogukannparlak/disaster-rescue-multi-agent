@@ -1,6 +1,21 @@
 # Disaster Rescue Multi-Agent System
 
+![Python](https://img.shields.io/badge/python-3.10%2B-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Ollama](https://img.shields.io/badge/backend-Ollama-orange)
+
 A multi-agent system for disaster rescue coordination, powered by **LLM-based agents** via Ollama.
+
+---
+
+## Features
+
+- **Three-agent LLM pipeline** — Planner, Assignment, and Critic agents collaborate via Ollama
+- **Heterogeneous robot fleet** — capability-matched task execution with speed-based simulation
+- **Quantitative evaluation** — capability match, priority order, load balance, and completion metrics
+- **Interactive CLI** — adjust tasks, seed, grid size, and output path without restarting
+- **HTML dashboard** — multi-page visual report loaded from `results/latest.json`
+- **Reproducible runs** — seeded task generation with traceable JSON exports per run
 
 ---
 
@@ -29,8 +44,6 @@ ollama pull qwen2.5-coder:7b
 ollama run qwen2.5-coder:7b
 ```
 
-
-
 ### 3. Configure your environment
 ```bash
 copy .env.example .env
@@ -42,11 +55,14 @@ python main.py
 ```
 
 ---
+
 ## All CLI Flags
 
 ```
 --tasks        N            Generate N tasks (default: 10)
 --seed         N            Random seed for reproducibility (default: 42)
+--grid         N            Grid size NxN (default: 20)
+--out          PATH         Output JSON path (default: auto under results/)
 --no-delay                  Skip simulated execution delays (faster demo)
 --interactive, -i           Run in interactive mode with parameter menu
 ```
@@ -68,7 +84,7 @@ python main.py --interactive
 python main.py -i
 ```
 
-### Features
+### Interactive features
 
 - **Live parameter adjustment** — change tasks, seed, grid size, delay, and output path without restarting
 - **Random seed generator** — quickly test different scenarios with `[R]`
@@ -115,7 +131,7 @@ OLLAMA_MODEL=qwen2.5-coder:7b
 ## Project Structure
 
 ```
-cse419_hw01_221805040/
+disaster-rescue-multi-agent/
 │
 ├── agents/
 │   ├── base.py                    # BasePlannerAgent, BaseAssignmentAgent, BaseCriticAgent
@@ -129,7 +145,7 @@ cse419_hw01_221805040/
 ├── report/
 │   ├── index.html                 # Dashboard home page
 │   ├── report.html                # Redirects to index.html (backwards compat)
-│   ├── report.md                  # Written project report
+│   ├── report.md                  # Technical design & evaluation notes
 │   ├── css/
 │   │   └── styles.css             # Dashboard styles
 │   ├── js/
@@ -152,15 +168,17 @@ cse419_hw01_221805040/
 │   ├── latest.json                # Dashboard data (latest run)
 │   └── t*_g*_s*_*.json           # Individual traceable runs
 ├── main.py                        # CLI entry point
-├── colab_notebook.ipynb           # Google Colab notebook
 ├── requirements.txt
 ├── .env.example
+├── LICENSE
+├── CONTRIBUTING.md
 └── README.md
 ```
 
 ---
 
 ## Architecture
+
 ```
 ┌───────────────────────────────┐
 │        BaseAgent ABCs         │  (agents/base.py)
@@ -187,6 +205,7 @@ cse419_hw01_221805040/
 │        simulation.py          │
 └───────────────────────────────┘
 ```
+
 ### Pipeline
 
 ```
@@ -248,3 +267,26 @@ To view a specific past run in the dashboard:
 ```
 report/index.html?json=results/t10_g20_s42_20260317-143000_ab12cd.json
 ```
+
+---
+
+## Roadmap
+
+- [ ] Multi-pass Critic loop with automatic retry on assignment failures
+- [ ] Majority-vote or N-retry strategy to mitigate LLM non-determinism
+- [ ] Travel-distance cost modelling on the disaster grid
+- [ ] Parallel robot execution with asyncio
+- [ ] Dynamic fleet scaling and multi-capability robots
+- [ ] Additional Ollama model profiles via `.env`
+
+---
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## Contributing
+
+Contributions are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup instructions, extension points, and pull request guidelines.

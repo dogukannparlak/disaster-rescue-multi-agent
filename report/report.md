@@ -1,11 +1,9 @@
-# CSE419 — Artificial Intelligence
+# LLM-Based Disaster Rescue Multi-Agent System
 
-## CSE419 Homework 01 : LLM-Based Disaster Rescue Multi-Agent System
+## Technical Design & Evaluation Notes
 
-**Student Name:** Doğukan
-**Student ID:** 221805040
-**Date:** March 2026
-**University:** Aydın Adnan Menderes University
+**Project:** disaster-rescue-multi-agent
+**Author:** Doğukan
 
 ---
 
@@ -496,4 +494,3 @@ The most significant finding is the **non-determinism of LLM outputs**: identica
 The modular architecture makes it straightforward to extend: additional task types, larger robot fleets, more capable Ollama models, or richer evaluation metrics can be integrated without restructuring the pipeline. The `results/`-based JSON storage and interactive CLI enable rapid experimentation and reproducible cross-run comparisons.
 
 ---
-
